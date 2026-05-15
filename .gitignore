@@ -1,8 +1,19 @@
 # Compiled class file
 *.class
 
-# Log file
-*.log
+# Settings file, containing confidential data
+Settings.json
+
+# Log files
+/logs/
+
+# Excel files
+*.xls
+*.xlsx
+EuroJackpot.xlsx
+Games.xlsx
+Lotto.xlsx
+Viking.xlsx
 
 # BlueJ files
 *.ctxt
