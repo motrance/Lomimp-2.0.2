@@ -1,8 +1,9 @@
 # Compiled class file
 *.class
 
-# Settings file, containing confidential data
+# Local only files
 Settings.json
+TODO.txt
 
 # Log files
 /logs/
