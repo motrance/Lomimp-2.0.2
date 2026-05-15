@@ -1,15 +1,16 @@
 # Lomimp-2.0.2
 Lomimp-2.0.2
 
-MYSQL database is required for this application.
+- Database
+- Configuration
 
 Database:
+A MYSQL database is required for this application.
 
 Database MySql
 CREATE DATABASE `lomimp` /*!40100 DEFAULT CHARACTER SET utf8mb4 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 Tables:
-
 CREATE TABLE `eurojackpot` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date` varchar(45) NOT NULL,
@@ -84,3 +85,42 @@ CREATE TABLE `lotto` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=608 DEFAULT CHARSET=utf8mb4;
+
+Configuration:
+A configuraton file, Settings.json, is required.
+
+Example of settings.json file:
+{	
+	"LOGLEVEL":5,
+	"DB": {
+		"DBUSER": "xxxxxx",
+		"DBPASS": "xxxxxx",
+		"DBHOST": "jdbc:mysql://localhost:3306/lomimp?serverTimezone=Europe/Copenhagen"
+	},
+	"GAMES":{
+		"VIKING":{
+				"initialYear":2012,
+				"url":"https://danskelotto.com/viking-lotto/vindertal/arkiv-",
+				"numberSize":6,
+				"numberMax":48,
+				"extrasize":1,
+				"extraMax":5
+		},
+		"EUROJACKPOT":{
+				"initialYear":2012,
+				"url":"https://www.euro-jackpot.net/da/resultatarkiv-",
+				"numberSize":5,
+				"numberMax":50,
+				"extrasize":2,
+				"extraMax":12
+		},
+		"LOTTO":{
+				"initialYear":1990,
+				"url":"https://danskelotto.com/lotto/vindertal/arkiv-",
+				"numberSize":7,
+				"numberMax":36,
+				"extrasize":0,
+				"extraMax":0
+		}
+	}
+}
