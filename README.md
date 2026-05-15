@@ -1,5 +1,5 @@
 # Lomimp-2.0.1
-Lomimp-2.0.1
+Lomimp-2.0.2
 
 MYSQL database is required for this application.
 
