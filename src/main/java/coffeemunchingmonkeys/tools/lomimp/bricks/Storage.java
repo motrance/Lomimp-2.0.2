@@ -13,15 +13,8 @@ import coffeemunchingmonkeys.tools.lomimp.core.*;
  * @version 2.0.2
  * @since 2026-05-15
  **/
-public class Storage {
+public class Storage extends DBHelper {
     //Fields
-    Settings settings;
-    LogProvider log;
-    Connection con;
-    String dbUser = "";
-    String dbPass = "";
-    String dbHost = "";
-
     Row latestRow;
 
     public Storage(Settings settings, LogProvider log) {
@@ -39,7 +32,7 @@ public class Storage {
         boolean state = true;
 
         try{
-            con = DriverManager.getConnection(this.dbHost, this.dbUser, this.dbPass);
+            conn = DriverManager.getConnection(this.dbHost, this.dbUser, this.dbPass);
         }
         catch(Exception e) {
             state = false;
@@ -56,7 +49,7 @@ public class Storage {
         boolean state = true;
 
         try{
-            con.close();
+            conn.close();
         }
         catch(Exception e) {
             state = false;
@@ -76,7 +69,7 @@ public class Storage {
         ArrayList<Row> rows = new ArrayList<Row>();
 
         try {
-            Statement st = this.con.createStatement();
+            Statement st = this.conn.createStatement();
 
             ResultSet rs = st.executeQuery(query);
             {
@@ -125,7 +118,7 @@ public class Storage {
                     "ORDER BY date DESC, id DESC";
         ArrayList<Row> rows = new ArrayList<Row>();
 
-        try (PreparedStatement pst = this.con.prepareStatement(query)) {
+        try (PreparedStatement pst = this.conn.prepareStatement(query)) {
             pst.setString(1, date);
             ResultSet rs = pst.executeQuery();
             
@@ -193,7 +186,7 @@ public class Storage {
                         query += values + ")";
 
                         int indexCounter = 1;
-                        PreparedStatement preparedStmt = con.prepareStatement(query);
+                        PreparedStatement preparedStmt = conn.prepareStatement(query);
                         preparedStmt.setString(indexCounter++, row.getDate());
                         preparedStmt.setInt(indexCounter++, row.getYear());
                         preparedStmt.setInt(indexCounter++, row.getCw());
@@ -229,7 +222,7 @@ public class Storage {
         String selectedGameString = selectedGame.toLowerCase();
         int numRowsAffected = 0;
         try {
-            Statement sqlStatement = con.createStatement();
+            Statement sqlStatement = conn.createStatement();
             numRowsAffected = sqlStatement.executeUpdate("delete from " + selectedGameString + " where date = '9999-99-99'");
         }
         catch(Exception e) {
