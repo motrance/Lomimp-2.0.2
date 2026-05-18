@@ -82,7 +82,7 @@ public abstract class SpreadSheetHelper {
             redDK = new XSSFColor(Hex.decodeHex("ff4000"), null);
             redLt = new XSSFColor(Hex.decodeHex("ffa6a6"), null);
         } catch (Exception e) {
-            log.write(e);
+            log.writeException(e);
         }
 
         DataFormat format = this.workBook.createDataFormat();
@@ -245,7 +245,7 @@ public abstract class SpreadSheetHelper {
             }
         }
         catch(Exception e) {
-            log.write( e );
+            log.writeException( e );
         }
     }
 

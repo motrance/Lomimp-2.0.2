@@ -52,7 +52,7 @@ public class Settings {
             this.lottoSettings = parseSettings(root.get("GAMES").get("LOTTO"));
         } catch (IOException e) {
             log.writeError("Failed to load settings from JSON file.");
-            log.write(e);
+            log.writeException(e);
         }
     }
 

@@ -49,7 +49,7 @@ public abstract class DBHelper {
                 "ENGINE=InnoDB AUTO_INCREMENT=608 DEFAULT CHARSET=utf8mb4";
                 stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            log.write(e);
+            log.writeException(e);
         }
     }
 
@@ -59,7 +59,7 @@ public abstract class DBHelper {
                 String sql = "TRUNCATE TABLE " + table;
                 stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            log.write(e);
+            log.writeException(e);
         }
     }
 
@@ -69,7 +69,7 @@ public abstract class DBHelper {
                 String sql = "DROP TABLE " + table;
                 stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            log.write(e);
+            log.writeException(e);
         }
     }
 }

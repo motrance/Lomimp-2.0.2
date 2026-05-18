@@ -36,7 +36,7 @@ public class Storage extends DBHelper {
         }
         catch(Exception e) {
             state = false;
-            log.write(e);
+            log.writeException(e);
         }
 
         return state;
@@ -53,7 +53,7 @@ public class Storage extends DBHelper {
         }
         catch(Exception e) {
             state = false;
-            log.write(e);
+            log.writeException(e);
         }
 
         return state;
@@ -97,7 +97,7 @@ public class Storage extends DBHelper {
             st.close();
         }
         catch (Exception e) {
-            log.write(e);
+            log.writeException(e);
         }
 
         return rows;
@@ -143,7 +143,7 @@ public class Storage extends DBHelper {
             }
         }
         catch (Exception e) {
-            log.write(e);
+            log.writeException(e);
         }
 
         return rows;
@@ -204,7 +204,7 @@ public class Storage extends DBHelper {
                 }
                 catch(Exception e) {
                     log.writeDebug("Error in latestRow: " + latestRow.getDate() );
-                    log.write(e);
+                    log.writeException(e);
                 }
             }
         }
@@ -227,7 +227,7 @@ public class Storage extends DBHelper {
         }
         catch(Exception e) {
             log.writeDebug("Error cleaning up after test");
-            log.write(e);
+            log.writeException(e);
         }
 
         log.writeDebug("Cleaned up after test. Rows deleted: " + numRowsAffected);

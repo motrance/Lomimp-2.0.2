@@ -95,11 +95,21 @@ public class LogProvider {
     /** 
      * @param msg
      */
-    public void writeDebug(String msg) {
-        if (logLevel.logLevel() >= LogLevel.DEBUG.logLevel()) {
-            log(msg, "Debug");
-        } else {
-            printToGui(msg);
+    public void writeException(Exception e) {
+        if (logLevel.logLevel() >= LogLevel.EXCEPTIONS.logLevel()) {
+            log(stack2string(e), "Exception");
+        }
+    }
+    
+    public void writeError(String msg) {
+        if (logLevel.logLevel() >= LogLevel.ERROR.logLevel()) {
+            log(msg, "Error");
+        }
+    }
+    
+    public void writeWarning(String msg) {
+        if (logLevel.logLevel() >= LogLevel.WARNING.logLevel()) {
+            log(msg, "Warning");
         }
     }
 
@@ -110,23 +120,14 @@ public class LogProvider {
 
     }
 
-    public void writeWarning(String msg) {
-        if (logLevel.logLevel() >= LogLevel.WARNING.logLevel()) {
-            log(msg, "Warning");
+    public void writeDebug(String msg) {
+        if (logLevel.logLevel() >= LogLevel.DEBUG.logLevel()) {
+            log(msg, "Debug");
+        } else {
+            printToGui(msg);
         }
     }
 
-    public void writeError(String msg) {
-        if (logLevel.logLevel() >= LogLevel.ERROR.logLevel()) {
-            log(msg, "Error");
-        }
-    }
-
-    public void write(Exception e) {
-        if (logLevel.logLevel() >= LogLevel.EXCEPTIONS.logLevel()) {
-            log(stack2string(e), "Exception");
-        }
-    }
 
     /** 
      * @param exception

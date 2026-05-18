@@ -130,7 +130,7 @@ public class ConnectEuroJackpot extends ConnectorCore implements IConnector {
                 rows.addAll(rowsYear);
             }
         } catch (Exception e) {
-            log.write(e);
+            log.writeException(e);
 
             if(code == 200) {
                 code = -1;

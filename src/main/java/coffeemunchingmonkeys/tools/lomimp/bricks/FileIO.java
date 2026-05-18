@@ -33,7 +33,7 @@ public class FileIO {
             workBook.write(this.fileOutputStream);
         }
         catch(Exception e) {
-            log.write(e);
+            log.writeException(e);
 
             state = false;
         }
@@ -58,7 +58,7 @@ public class FileIO {
             this.fileOutputStream.close();
         }
         catch(Exception e) {
-            log.write(e);
+            log.writeException(e);
 
             state = false;
         }
@@ -80,7 +80,7 @@ public class FileIO {
             this.fileOutputStream.close();
         }
         catch(Exception e) {
-            log.write(e);
+            log.writeException(e);
 
             state = false;
         }

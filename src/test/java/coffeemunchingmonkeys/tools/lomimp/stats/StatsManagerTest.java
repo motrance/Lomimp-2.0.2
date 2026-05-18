@@ -61,7 +61,7 @@ public class StatsManagerTest {
         }
 
         @Override
-        public void write(Exception e) {
+        public void writeException(Exception e) {
             // no-op
         }
     }

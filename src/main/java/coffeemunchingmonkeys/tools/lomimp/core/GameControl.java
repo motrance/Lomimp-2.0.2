@@ -104,7 +104,7 @@ public class GameControl {
                         success = false;
                     }
                 } catch (Exception e) {
-                    log.write(e);
+                    log.writeException(e);
                     success = false;
                 }
                 if (fileIO.close(workBook)) {
