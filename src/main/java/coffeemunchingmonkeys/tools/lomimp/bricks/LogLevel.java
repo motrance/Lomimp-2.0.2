@@ -30,13 +30,6 @@ public enum LogLevel {
         this.logLevel = logLevel;
     }
 
-    LogLevel(String logLevelStgring) {
-        if(logLevelStgring != null && logLevelStgring.length() > 0) {
-            
-            this.logLevel = logLevel;
-        }
-    }
-
     public Integer logLevel() {
         return logLevel;
     }

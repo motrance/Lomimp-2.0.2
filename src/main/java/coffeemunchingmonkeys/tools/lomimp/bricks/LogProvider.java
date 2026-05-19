@@ -77,7 +77,7 @@ public class LogProvider {
                 System.out.println(formatted + "\t" + logLevelString.name() + "\t" + msg);
 
             // 3. GUI (NO TIMESTAMP, NO SEVERITY)
-            if (severity < 3) {
+            if (severity != null && severity < 3) {
                 printToGui(msg);
             }
         } catch (IOException e) {
@@ -162,6 +162,14 @@ public class LogProvider {
     public void setLogLevel(Integer level)
     {
         logLevel = LogLevel.values()[(level!=null && level >=0 && level < LogLevel.values().length)? level : LogLevel.Debug.logLevel()];
+    }
+
+    public void setLogLevel(String logLevelStgring) {
+        if(logLevelStgring != null && logLevelStgring.length() > 0) {
+            logLevel = logLevel.valueOf(logLevelStgring);
+            logLevel = logLevel.valueOf(logLevelStgring);
+            //this.logLevel = logLevel;
+        }
     }
 
     /**
