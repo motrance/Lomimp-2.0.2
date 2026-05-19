@@ -11,18 +11,18 @@ package coffeemunchingmonkeys.tools.lomimp.bricks;
 public enum LogLevel {
     //Logleve
     //   0 = no log
-    //   1 = exceptions only
+    //   1 = info
     //   2 = errors
     //   3 = warnings
-    //   4 = info
+    //   4 = exceptions
     //   5 = debug
-    
-    NONE(0),
-    EXCEPTIONS(1),
-    ERROR(2),
-    WARNING(3),
-    INFO(4),
-    DEBUG(5);
+
+    None(0),
+    Info(1),
+    Error(2),
+    Warning(3),
+    Exceptions(4),
+    Debug(5);
 
     private Integer logLevel;
 
@@ -30,11 +30,18 @@ public enum LogLevel {
         this.logLevel = logLevel;
     }
 
+    LogLevel(String logLevelStgring) {
+        if(logLevelStgring != null && logLevelStgring.length() > 0) {
+            
+            this.logLevel = logLevel;
+        }
+    }
+
     public Integer logLevel() {
         return logLevel;
     }
 
     @Override public String toString() {
-        return String.valueOf(logLevel != null ? logLevel : 0);
+        return String.valueOf(logLevel != null ? logLevel : 1);
     } 
 }

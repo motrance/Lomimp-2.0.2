@@ -17,15 +17,15 @@ import java.time.format.DateTimeFormatter;
  * Lomimp
  * bricks.Storage
  * 
- * Loglevel - 0 for no log, 1 for exceptions only, 2 for error, 3 for warning, 4 for info and 5 for debug
- *
+ * Loglevel - 0 for no log, 1 for info, 2 for errors, 3 for warnings, 4 for exceptions and 5 for debug
+ * 
  * @version 2.0.2
  * @since 2026-05-15
  */
 public class LogProvider {
     //Fields
     private final Path logPath = Paths.get("logs/log.txt");
-    private static LogLevel logLevel = LogLevel.DEBUG;
+    private static LogLevel logLevel = LogLevel.Debug;
     static 	boolean printToConsole = true;
     private FileChannel channel;
     private JTextArea jTextArea;
@@ -58,13 +58,14 @@ public class LogProvider {
     /** 
      * @param msg
      */
-    private synchronized void log(String msg, String severity) {
+    private synchronized void log(String msg, Integer severity) {
         try {
+            LogLevel logLevelString = LogLevel.values()[(severity!=null && severity >=0 && severity < LogLevel.values().length)? severity : LogLevel.Debug.logLevel()];
+
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd'T'HH:mm:ss:SSS");
             String formatted = now.format(formatter);
-
-            String line = formatted + "\t" + severity + "\t" + msg + System.lineSeparator();
+            String line = formatted + "\t" + logLevelString.name() + "\t" + msg + System.lineSeparator();
             ByteBuffer buffer = ByteBuffer.wrap(line.getBytes());
 
             // 1. REALTIME FILE WRITE
@@ -73,11 +74,12 @@ public class LogProvider {
 
             // 2. TERMINAL (NO TIMESTAMP, NO SEVERITY)
             if(printToConsole)
-                System.out.println(formatted + "\t" + severity + "\t" + msg);
+                System.out.println(formatted + "\t" + logLevelString.name() + "\t" + msg);
 
             // 3. GUI (NO TIMESTAMP, NO SEVERITY)
-            printToGui(msg);
-
+            if (severity < 3) {
+                printToGui(msg);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,39 +94,36 @@ public class LogProvider {
             }
     }
     
-    /** 
-     * @param msg
-     */
-    public void writeException(Exception e) {
-        if (logLevel.logLevel() >= LogLevel.EXCEPTIONS.logLevel()) {
-            log(stack2string(e), "Exception");
+
+    //Loglevel - 0 for no log, 1 for info, 2 for errors, 3 for warnings, 4 for exceptions and 5 for debug
+    public void writeInfo(String msg) {
+        if (logLevel.logLevel() >= LogLevel.Info.logLevel()) {
+            log(msg, 1);
         }
+
     }
     
     public void writeError(String msg) {
-        if (logLevel.logLevel() >= LogLevel.ERROR.logLevel()) {
-            log(msg, "Error");
+        if (logLevel.logLevel() >= LogLevel.Error.logLevel()) {
+            log(msg, 2);
         }
     }
-    
+
     public void writeWarning(String msg) {
-        if (logLevel.logLevel() >= LogLevel.WARNING.logLevel()) {
-            log(msg, "Warning");
+        if (logLevel.logLevel() >= LogLevel.Warning.logLevel()) {
+            log(msg, 3);
         }
     }
 
-    public void writeInfo(String msg) {
-        if (logLevel.logLevel() >= LogLevel.INFO.logLevel()) {
-            log(msg, "Info");
+    public void writeException(Exception e) {
+        if (logLevel.logLevel() >= LogLevel.Exceptions.logLevel()) {
+            log(stack2string(e), 4);
         }
-
     }
 
     public void writeDebug(String msg) {
-        if (logLevel.logLevel() >= LogLevel.DEBUG.logLevel()) {
-            log(msg, "Debug");
-        } else {
-            printToGui(msg);
+        if (logLevel.logLevel() >= LogLevel.Debug.logLevel()) {
+            log(msg, 5);
         }
     }
 
@@ -162,7 +161,7 @@ public class LogProvider {
      */
     public void setLogLevel(Integer level)
     {
-        logLevel = LogLevel.values()[(level!=null && level >=0 && level < LogLevel.values().length)? level : LogLevel.DEBUG.logLevel()];
+        logLevel = LogLevel.values()[(level!=null && level >=0 && level < LogLevel.values().length)? level : LogLevel.Debug.logLevel()];
     }
 
     /**

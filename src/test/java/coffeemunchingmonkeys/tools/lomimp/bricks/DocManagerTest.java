@@ -18,7 +18,7 @@ public class DocManagerTest {
     @Test
     public void testCreateStatExtraSheetHeaderAndContent() {
         LogProvider logProvider = new LogProvider();
-        logProvider.setLogLevel(LogLevel.NONE);
+        logProvider.setLogLevel(LogLevel.None);
         logProvider.setPrintToConsole(false);
 
         Settings settings = new Settings();
@@ -79,7 +79,7 @@ public class DocManagerTest {
     @Test
     public void testCreateStatNumberSheetHeaderAndContent() {
         LogProvider logProvider = new LogProvider();
-        logProvider.setLogLevel(LogLevel.NONE);
+        logProvider.setLogLevel(LogLevel.None);
         logProvider.setPrintToConsole(false);
         
         Settings settings = new Settings();

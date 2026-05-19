@@ -86,6 +86,8 @@ CREATE TABLE `lotto` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=608 DEFAULT CHARSET=utf8mb4;
 
+# Loglevel - 0 for no log, 1 for info, 2 for errors, 3 for warnings, 4 for exceptions and 5 for debug
+
 Configuration:
 A configuraton file, Settings.json, is required.
 

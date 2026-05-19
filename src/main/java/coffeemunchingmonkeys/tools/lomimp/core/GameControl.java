@@ -122,9 +122,9 @@ public class GameControl {
             success = false;
         }
         if(success && storage.disconnect()) {
-                log.writeInfo("Disconnected from db");
+                log.writeDebug("Disconnected from db");
         } else {
-            log.writeError("Unable to disconnect from db");
+            log.writeDebug("Unable to disconnect from db");
         }
         return success;
     }
