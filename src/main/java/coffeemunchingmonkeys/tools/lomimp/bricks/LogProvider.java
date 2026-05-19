@@ -166,8 +166,7 @@ public class LogProvider {
 
     public void setLogLevel(String logLevelStgring) {
         if(logLevelStgring != null && logLevelStgring.length() > 0) {
-            logLevel = logLevel.valueOf(logLevelStgring);
-            logLevel = logLevel.valueOf(logLevelStgring);
+            logLevel = LogLevel.valueOf(logLevelStgring);
             //this.logLevel = logLevel;
         }
     }
