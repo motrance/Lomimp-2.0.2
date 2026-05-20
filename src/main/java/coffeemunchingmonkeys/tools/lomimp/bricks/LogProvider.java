@@ -11,7 +11,6 @@ import static java.nio.file.StandardOpenOption.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 /**
  *
  * Lomimp
@@ -94,7 +93,6 @@ public class LogProvider {
             }
     }
     
-
     //Loglevel - 0 for no log, 1 for info, 2 for errors, 3 for warnings, 4 for exceptions and 5 for debug
     public void writeInfo(String msg) {
         if (logLevel.logLevel() >= LogLevel.Info.logLevel()) {
@@ -127,7 +125,6 @@ public class LogProvider {
         }
     }
 
-
     /** 
      * @param exception
      * @return String
@@ -152,7 +149,6 @@ public class LogProvider {
     {
         logLevel = level;
     }
-
 
     /**
      * set the log level of the logfile mechanism
