@@ -183,52 +183,6 @@ public class Lomimp extends javax.swing.JFrame {
     }
 
     /** 
-     * @param rows
-     * @param pairSize
-     * @param queryType
-     * @param docManager
-     */
-    public void stats(ArrayList<Row> rows, int pairSize, int queryType, DocManager docManager) {
-        /*
-        Euro euro = new Euro(rows, pairSize);
-        Star star = new Star(rows, pairSize);
-
-        SortedMap<String, Integer> numbersMap = euro.getMap();
-        SortedMap<String, Integer> starsMap = null;
-
-        if(pairSize < 3) {
-            starsMap = star.getMap();
-        }
-
-        if(docManager != null) {
-            if(pairSize == 3 && queryType == 2) {
-                docManager.createWeeksStatSheetContent(rows, allNumberPairsString, allExtraPairsString);
-            }
-
-            if(numbersMap != null) {
-                docManager.createNumbersStatSheetContent(numbersMap, pairSize, queryType);
-            }
-
-            if(starsMap != null) {
-                docManager.createStarsStatSheetContent(starsMap, pairSize, queryType);
-            }
-
-            if(pairSize == 1 && queryType == 2) {
-                docManager.createWeeksStatSheetContentPair1(rows, allNumberPairsString, allExtraPairsString);
-            }
-
-            if(pairSize == 2 && queryType == 2) {
-                docManager.createWeeksStatSheetContentPair2(rows, allNumberPairsString, allExtraPairsString);
-            }
-
-            if(pairSize == 3 && queryType == 2) {
-                docManager.createWeeksStatSheetContentPair3(rows, allNumberPairsString, allExtraPairsString);
-            }
-        }
-        */
-    }
-
-    /** 
      * @param evt
      */
     private void btStartActionPerformed(java.awt.event.ActionEvent evt) {
