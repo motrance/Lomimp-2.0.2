@@ -2,7 +2,6 @@ package coffeemunchingmonkeys.tools.lomimp;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import coffeemunchingmonkeys.tools.lomimp.core.*;
 import coffeemunchingmonkeys.tools.lomimp.bricks.*;
 
