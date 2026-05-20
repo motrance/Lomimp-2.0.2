@@ -209,7 +209,7 @@ public class Storage extends DBHelper {
             }
         }
 
-        log.writeDebug("Lines stored in db: " + linesStored);
+        log.writeInfo("Lines stored in db: " + linesStored);
 
         return linesStored;
     }
