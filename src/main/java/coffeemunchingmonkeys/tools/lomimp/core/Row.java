@@ -121,7 +121,6 @@ public class Row implements Cloneable {
         {
             state = false;
         }
-
         return state;
     }
 
@@ -143,7 +142,6 @@ public class Row implements Cloneable {
             returnString = returnString + "[" + tmpString + "]";
         }
         returnString = returnString + "}";
-
         return returnString;
     }
 
@@ -159,7 +157,6 @@ public class Row implements Cloneable {
         String inputRegexString = "\\{(\\[[0-9]+\\])*\\[" + number + "\\](\\[[0-9]+\\])*\\}";
 
         state = Pattern.matches(inputRegexString, numbers);
-
         return state;
     }
 
@@ -248,7 +245,6 @@ public class Row implements Cloneable {
         this.numberPairs = numberPairs;
     }
 
-
     /** 
      * @return ArrayList<Pair>
      */
@@ -320,7 +316,6 @@ public class Row implements Cloneable {
         String returnString = "";
 
         returnString = createArrayString(numbers);
-
         return returnString;
     }
 
@@ -332,7 +327,6 @@ public class Row implements Cloneable {
         String returnString = "";
 
         returnString = createArrayString(extras);
-
         return returnString;
     }
 

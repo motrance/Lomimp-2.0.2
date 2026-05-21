@@ -4,7 +4,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
-
 import coffeemunchingmonkeys.tools.lomimp.core.Row;
 import coffeemunchingmonkeys.tools.lomimp.bricks.*;
 
@@ -45,7 +44,6 @@ public class PairsHelper {
 
         BigInteger fullrow = fr1.multiply(fr2);
         theList.add(fullrow);
-
         return theList;
     }
 
@@ -87,7 +85,6 @@ public class PairsHelper {
 
         BigInteger fullrow = theList.get(theList.size() - 1);
         theList.add(fullrow);
-
         return theList;
     }
 
@@ -108,7 +105,6 @@ public class PairsHelper {
         for(int counter = 1; counter <= extraSize; counter++) {
             theList.add(calculateSize(counter, extraMax));
         }
-
         return theList;
     }
 
@@ -125,7 +121,6 @@ public class PairsHelper {
         BigInteger factMax = calculateFactorial(max);
         BigInteger factMaxMinusN = calculateFactorial(max - n);
         BigInteger factN = calculateFactorial(n);
-
         return factMax
                 .divide(factMaxMinusN)
                 .divide(factN);
@@ -142,7 +137,6 @@ public class PairsHelper {
         for (int i = 2; i <= number; i++) {
             result = result.multiply(BigInteger.valueOf(i));
         }
-
         return result;
     }
 
@@ -240,7 +234,6 @@ public class PairsHelper {
         for(Pair pair: pairs) {
             sortedMap.put(pair.toString(), 0);
         }
-
         return sortedMap;
     }
 }

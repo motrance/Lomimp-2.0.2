@@ -40,7 +40,6 @@ public class Pair {
         }
 
         returnString.trim();
-
         return returnString;
     }
 }

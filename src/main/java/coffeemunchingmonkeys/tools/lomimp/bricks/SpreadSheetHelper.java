@@ -2,7 +2,6 @@ package coffeemunchingmonkeys.tools.lomimp.bricks;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import org.apache.commons.codec.binary.Hex;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.DataFormat;
@@ -248,5 +247,4 @@ public abstract class SpreadSheetHelper {
             log.writeException( e );
         }
     }
-
 }

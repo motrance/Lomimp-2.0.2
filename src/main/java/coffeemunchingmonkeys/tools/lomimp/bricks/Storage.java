@@ -2,7 +2,6 @@ package coffeemunchingmonkeys.tools.lomimp.bricks;
 
 import java.sql.*;
 import java.util.ArrayList;
-
 import coffeemunchingmonkeys.tools.lomimp.core.*;
 
 /**

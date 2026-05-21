@@ -5,7 +5,6 @@ import coffeemunchingmonkeys.tools.lomimp.core.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
 /*
  * Lomimp
  * connector.ConnectorCore

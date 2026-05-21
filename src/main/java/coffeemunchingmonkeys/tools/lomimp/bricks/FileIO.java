@@ -37,7 +37,6 @@ public class FileIO {
 
             state = false;
         }
-
         return state;
     }
 
@@ -62,7 +61,6 @@ public class FileIO {
 
             state = false;
         }
-
         return state;
     }
 
@@ -84,7 +82,6 @@ public class FileIO {
 
             state = false;
         }
-
         return state;
     }
 }

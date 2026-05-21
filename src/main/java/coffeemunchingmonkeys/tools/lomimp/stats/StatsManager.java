@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import coffeemunchingmonkeys.tools.lomimp.bricks.DocManager;
 import coffeemunchingmonkeys.tools.lomimp.bricks.LogProvider;
 import coffeemunchingmonkeys.tools.lomimp.bricks.Settings;
@@ -80,7 +79,6 @@ public class  StatsManager {
             StatsDataHolder dataHolderAll = createNumberStats(rowsAll);
             statsDataHolders.add(dataHolderAll);
         }
-
         return statsDataHolders;
     }
 

@@ -2,7 +2,6 @@ package coffeemunchingmonkeys.tools.lomimp.bricks;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -18,7 +17,6 @@ public class RegexHelper {
 
     public RegexHelper() {
     }
-
 
     //Please create unitests for "coffeemunchingmonkeys.tools.lomimp.bricks.RegexHelper"//
     /**
@@ -62,7 +60,6 @@ public class RegexHelper {
 
         return count;
     }
-
 
     /**
      *
@@ -158,7 +155,6 @@ public class RegexHelper {
                 index = subMatcher.start();
             }
         }
-
         return index;
     }
 }
