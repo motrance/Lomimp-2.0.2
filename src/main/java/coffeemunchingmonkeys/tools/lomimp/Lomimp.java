@@ -177,7 +177,6 @@ public class Lomimp extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1)
                                 .addContainerGap())
         );
-
         pack();
     }
 
