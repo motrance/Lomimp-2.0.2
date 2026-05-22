@@ -96,32 +96,32 @@ public class LogProvider {
     //Loglevel - 0 for no log, 1 for info, 2 for errors, 3 for warnings, 4 for exceptions and 5 for debug
     public void writeInfo(String msg) {
         if (logLevel.logLevel() >= LogLevel.Info.logLevel()) {
-            log(msg, 1);
+            log(msg, LogLevel.Info.logLevel());
         }
 
     }
     
     public void writeError(String msg) {
         if (logLevel.logLevel() >= LogLevel.Error.logLevel()) {
-            log(msg, 2);
+            log(msg, LogLevel.Info.logLevel());
         }
     }
 
     public void writeWarning(String msg) {
         if (logLevel.logLevel() >= LogLevel.Warning.logLevel()) {
-            log(msg, 3);
+            log(msg, LogLevel.Warning.logLevel());
         }
     }
 
     public void writeException(Exception e) {
         if (logLevel.logLevel() >= LogLevel.Exceptions.logLevel()) {
-            log(stack2string(e), 4);
+            log(stack2string(e), LogLevel.Exceptions.logLevel());
         }
     }
 
     public void writeDebug(String msg) {
         if (logLevel.logLevel() >= LogLevel.Debug.logLevel()) {
-            log(msg, 5);
+            log(msg, LogLevel.Debug.logLevel());
         }
     }
 
