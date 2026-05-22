@@ -7,7 +7,6 @@ import coffeemunchingmonkeys.tools.lomimp.connector.ConnectViking;
 import coffeemunchingmonkeys.tools.lomimp.connector.IConnector;
 import coffeemunchingmonkeys.tools.lomimp.stats.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -188,10 +187,8 @@ public class GameControl {
                 deltaRows.add(row);
             }
         }
-
         return deltaRows;
     }
-
 
     /** 
      * full: true for all winning numbers back from 2013, false for current year only.
