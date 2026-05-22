@@ -6,7 +6,10 @@ Settings.json
 TODO.txt
 
 # Log files
+logs/
+logs/*
 /logs/
+/logs/*
 
 # Excel files
 *.xls
