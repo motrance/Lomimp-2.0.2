@@ -18,7 +18,7 @@ import java.util.TreeMap;
 /**
  *
  * Lomimp
- * core.Fetcher
+ * core.GameControl
  * 
  * @version 2.0.2
  * @since 2026-05-15
