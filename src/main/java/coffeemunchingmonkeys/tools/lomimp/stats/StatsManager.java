@@ -176,19 +176,21 @@ public class  StatsManager {
         return rows;
     }
 
-    /** 
+    /* 
      * @param selectedGame
      * @param date
      * @param storage
      * @param docManager
      * @return ArrayList<Row>
      */
+    /*
     private ArrayList<Row> fetchRowsFromDate(String selectedGame, String date, Storage storage, DocManager docManager) {
         //Fetch numbers from local db
         ArrayList<Row> rows = storage.readFromDate(selectedGame, date);
         return rows;
     }
-
+    */
+   
     /** 
      * @return vikingPairsStatic
      */
