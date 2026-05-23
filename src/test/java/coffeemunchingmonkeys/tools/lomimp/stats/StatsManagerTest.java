@@ -16,8 +16,8 @@ public class StatsManagerTest {
 
     private static class TestStorage extends Storage {
         private final ArrayList<Row> rows;
-        private boolean readAllCalled = false;
-        private boolean readFromDateCalled = false;
+        private int readAllCount = 0;
+        private int readFromDateCount = 0;
         private String readFromDateDate;
 
         public TestStorage(Settings settings, LogProvider log, ArrayList<Row> rows) {
@@ -27,13 +27,13 @@ public class StatsManagerTest {
 
         @Override
         public ArrayList<Row> readAll(String selectedGame) {
-            readAllCalled = true;
+            readAllCount++;
             return rows;
         }
 
         @Override
         public ArrayList<Row> readFromDate(String selectedGame, String date) {
-            readFromDateCalled = true;
+            readFromDateCount++;
             readFromDateDate = date;
             return rows;
         }
@@ -87,10 +87,9 @@ public class StatsManagerTest {
             Assert.assertNotNull(holder.getExtraCombCounts());
         }
 
-        Assert.assertTrue(storage.readAllCalled);
-        Assert.assertTrue(storage.readFromDateCalled);
-        Assert.assertNotNull(storage.readFromDateDate);
-        Assert.assertFalse(storage.readFromDateDate.isEmpty());
+        Assert.assertEquals(1, storage.readAllCount);
+        Assert.assertEquals(0, storage.readFromDateCount);
+        Assert.assertNull(storage.readFromDateDate);
     }
 
     @Test
