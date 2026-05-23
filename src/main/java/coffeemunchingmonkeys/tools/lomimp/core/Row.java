@@ -154,7 +154,8 @@ public class Row implements Cloneable {
     public boolean check(Integer number, String numbers) {
         boolean state = false;
 
-        String inputRegexString = "\\{(\\[[0-9]+\\])*\\[" + number + "\\](\\[[0-9]+\\])*\\}";
+        String paddedNumber = number < 10 ? "0" + number : String.valueOf(number);
+        String inputRegexString = "\\{(\\[[0-9]+\\])*\\[" + paddedNumber + "\\](\\[[0-9]+\\])*\\}";
 
         state = Pattern.matches(inputRegexString, numbers);
         return state;
