@@ -2,7 +2,7 @@
 *.class
 
 # Local only files
-Settings.config
+Settings.json
 TODO.txt
 
 # Log files
