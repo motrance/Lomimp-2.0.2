@@ -2,6 +2,7 @@
 *.class
 
 # Local only files
+Settings.conf
 TODO.txt
 
 # Log files
