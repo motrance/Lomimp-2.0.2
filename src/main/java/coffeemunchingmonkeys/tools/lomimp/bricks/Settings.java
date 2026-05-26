@@ -29,7 +29,7 @@ public class Settings {
 
     public Settings(LogProvider log) {
         this.log = log;
-        loadFromJson("settings.conf");
+        loadFromJson("Settings.json");
     }
 
     /** 
