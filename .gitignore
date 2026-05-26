@@ -2,8 +2,6 @@
 *.class
 
 # Local only files
-Settings.conf
-Settings.config
 TODO.txt
 
 # Log files
