@@ -106,6 +106,7 @@ public class Lomimp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
+        setIconImage(new javax.swing.ImageIcon("resources/lucky.ico").getImage());
 
         lblFetch.setIcon(new javax.swing.ImageIcon("resources/lucky.png"));
 

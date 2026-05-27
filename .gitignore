@@ -2,7 +2,7 @@
 *.class
 
 # Local only files
-Settings.json
+/resources/Settings.json
 TODO.txt
 
 # Log files

@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
 
 public class SettingsTest {
 
-    private final Path settingsPath = Paths.get("settings.json");
+    private final Path settingsPath = Paths.get("resources/Settings.json");
 
     @After
     public void cleanupSettingsFile() throws Exception {
