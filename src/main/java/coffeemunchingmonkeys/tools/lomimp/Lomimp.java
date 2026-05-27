@@ -107,7 +107,7 @@ public class Lomimp extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
 
-        lblFetch.setIcon(new javax.swing.ImageIcon("lucky.png"));
+        lblFetch.setIcon(new javax.swing.ImageIcon("resources/lucky.png"));
 
         cbFetch.setText("Fetch latest numbers");
         cbStat.setText("Stats");
