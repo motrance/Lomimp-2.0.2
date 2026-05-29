@@ -89,11 +89,11 @@ CREATE TABLE `lotto` (
 # Loglevel - 0 for no log, 1 for info, 2 for errors, 3 for warnings, 4 for exceptions and 5 for debug
 
 Configuration:
-A configuraton file, Settings.json, is required.
+A configuraton file, "Settings.json" places in the folder "resources", is required.
 
 Example of settings.json file:
 {	
-	"LOGLEVEL":5,
+	"LOGLEVEL":4,
 	"DB": {
 		"DBUSER": "xxxxxx",
 		"DBPASS": "xxxxxx",
