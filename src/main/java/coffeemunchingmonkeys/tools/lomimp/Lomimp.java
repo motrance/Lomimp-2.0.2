@@ -1,7 +1,11 @@
 package coffeemunchingmonkeys.tools.lomimp;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import com.google.common.io.Files;
 import coffeemunchingmonkeys.tools.lomimp.core.*;
 import coffeemunchingmonkeys.tools.lomimp.bricks.*;
 
@@ -35,7 +39,7 @@ public class Lomimp extends javax.swing.JFrame {
     private Boolean firstRun = true;
 
     public Lomimp() {
-        initComponents();
+        String returnString = initComponents();
         this.firstRun = true;
         log = new LogProvider(jTextArea1);
         this.settings = new Settings(log);
@@ -48,6 +52,10 @@ public class Lomimp extends javax.swing.JFrame {
 
         String txt = "Lomimp[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")) + "]";
         log.writeInfo(txt);
+
+        if(returnString != null) {
+            log.writeError(returnString);
+        }
     }
 
     private void initLomimp() {
@@ -73,7 +81,7 @@ public class Lomimp extends javax.swing.JFrame {
         fetchLatestNumbers = cbFetch.isSelected();
         log.writeDebug("Fetching latest drawn numbers: " + fetchLatestNumbers);
         stats = cbStat.isSelected();
-        log.writeDebug("Statistic: " + stats);
+        log.writeInfo("Statistic: " + stats);
 
         GameControl gameControl = new GameControl(this.log, this.settings);
         Boolean fetchNumbersFromWeb = cbFetch.isSelected();
@@ -94,7 +102,9 @@ public class Lomimp extends javax.swing.JFrame {
     /**
      *
      */
-    private void initComponents() {
+    private String initComponents() {
+        String returnString = null;
+
         jScrollPane1 = new javax.swing.JScrollPane();
         lblFetch = new javax.swing.JLabel();
         cbGameSelector = new javax.swing.JComboBox<>();
@@ -106,37 +116,23 @@ public class Lomimp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
-        java.net.URL iconUrl = getClass().getResource("resources/lucky.ico");
-        java.awt.Image iconImage = null;
-        if (iconUrl != null) {
-            iconImage = new javax.swing.ImageIcon(iconUrl).getImage();
-        } else {
-            iconImage = new javax.swing.ImageIcon("resources/lucky.ico").getImage();
-        }
-        if (iconImage != null) {
-            java.util.List<java.awt.Image> icons = new java.util.ArrayList<>();
-            icons.add(iconImage);
-            java.net.URL pngUrl = getClass().getResource("resources/lucky.png");
-            if (pngUrl != null) {
-                icons.add(new javax.swing.ImageIcon(pngUrl).getImage());
-            } else {
-                try {
-                    java.awt.Image pngImage = new javax.swing.ImageIcon("resources/lucky.png").getImage();
-                    if (pngImage != null) icons.add(pngImage);
-                } catch (Throwable t) {
-                    // ignore
-                }
-            }
-            setIconImages(icons);
-            try {
-                java.awt.Taskbar tb = java.awt.Taskbar.getTaskbar();
-                tb.setIconImage(iconImage);
-            } catch (Throwable t) {
-                // Taskbar not supported or security prevented it; ignore
-            }
-        }
 
-        lblFetch.setIcon(new javax.swing.ImageIcon("resources/lucky.png"));
+        String imagePath = "resources/lucky.png";
+
+        boolean exists = new File(imagePath).exists();
+        if(exists) {
+            // Load icon
+            java.awt.Image pngImage = new javax.swing.ImageIcon(imagePath).getImage();
+            java.util.List<java.awt.Image> icons = new java.util.ArrayList<>();
+            if (pngImage != null) 
+                icons.add(pngImage);
+            setIconImages(icons);
+
+            // Load image
+            lblFetch.setIcon(new javax.swing.ImageIcon(imagePath));            
+        } else {
+            returnString = "Image not found: " + imagePath;
+        }
 
         cbFetch.setText("Fetch latest numbers");
         cbStat.setText("Stats");
@@ -144,6 +140,7 @@ public class Lomimp extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setEditable(false);
         jTextArea1.setBorder(null);
         jScrollPane1.setViewportView(jTextArea1);
         jScrollPane1.setBorder(null);
@@ -207,6 +204,7 @@ public class Lomimp extends javax.swing.JFrame {
                                 .addContainerGap())
         );
         pack();
+        return returnString;
     }
 
     /** 

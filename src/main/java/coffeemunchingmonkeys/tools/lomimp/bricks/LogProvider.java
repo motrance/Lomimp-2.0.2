@@ -76,7 +76,7 @@ public class LogProvider {
                 System.out.println(formatted + "\t" + logLevelString.name() + "\t" + msg);
 
             // 3. GUI (NO TIMESTAMP, NO SEVERITY)
-            if (severity != null && severity < 3) {
+            if (severity != null && severity == 1) {
                 printToGui(msg);
             }
         } catch (IOException e) {
@@ -103,7 +103,7 @@ public class LogProvider {
     
     public void writeError(String msg) {
         if (logLevel.logLevel() >= LogLevel.Error.logLevel()) {
-            log(msg, LogLevel.Info.logLevel());
+            log(msg, LogLevel.Error.logLevel());
         }
     }
 
