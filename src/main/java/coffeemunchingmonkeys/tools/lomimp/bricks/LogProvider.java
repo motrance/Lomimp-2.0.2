@@ -92,7 +92,10 @@ public class LogProvider {
                 jTextArea.append(msg + "\n");
             }
     }
-    
+
+    /** 
+     * @param msg
+     */
     //Loglevel - 0 for no log, 1 for info, 2 for errors, 3 for warnings, 4 for exceptions and 5 for debug
     public void writeInfo(String msg) {
         if (logLevel.logLevel() >= LogLevel.Info.logLevel()) {
@@ -101,24 +104,36 @@ public class LogProvider {
 
     }
     
+    /** 
+     * @param msg
+     */
     public void writeError(String msg) {
         if (logLevel.logLevel() >= LogLevel.Error.logLevel()) {
             log(msg, LogLevel.Error.logLevel());
         }
     }
 
+    /** 
+     * @param msg
+     */
     public void writeWarning(String msg) {
         if (logLevel.logLevel() >= LogLevel.Warning.logLevel()) {
             log(msg, LogLevel.Warning.logLevel());
         }
     }
 
+    /** 
+     * @param e
+     */
     public void writeException(Exception e) {
         if (logLevel.logLevel() >= LogLevel.Exceptions.logLevel()) {
             log(stack2string(e), LogLevel.Exceptions.logLevel());
         }
     }
 
+    /** 
+     * @param msg
+     */
     public void writeDebug(String msg) {
         if (logLevel.logLevel() >= LogLevel.Debug.logLevel()) {
             log(msg, LogLevel.Debug.logLevel());
@@ -160,6 +175,9 @@ public class LogProvider {
         logLevel = LogLevel.values()[(level!=null && level >=0 && level < LogLevel.values().length)? level : LogLevel.Debug.logLevel()];
     }
 
+    /** 
+     * @param logLevelStgring
+     */
     public void setLogLevel(String logLevelStgring) {
         if(logLevelStgring != null && logLevelStgring.length() > 0) {
             logLevel = LogLevel.valueOf(logLevelStgring);
