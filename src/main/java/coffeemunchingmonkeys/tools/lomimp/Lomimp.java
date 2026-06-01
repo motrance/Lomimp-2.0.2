@@ -34,14 +34,17 @@ public class Lomimp extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.GroupLayout layout;
     private Boolean firstRun = true;
+    private String imagePath = "resources/lucky.png";
 
     public Lomimp() {
         String returnString = initComponents();
         this.firstRun = true;
         log = new LogProvider(jTextArea1);
         this.settings = new Settings(log);
-
+        String logPath = settings.getLogPath();
         Integer logLevel = settings.getLogLevel();
+        log.setlogPath(logPath);
+
         if(logLevel != null) {
             log.setLogLevel(LogLevel.values()[logLevel]);
             log.writeDebug("Log level set to: " + logLevel);
@@ -113,8 +116,6 @@ public class Lomimp extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
-
-        String imagePath = "resources/lucky.png";
 
         boolean exists = new File(imagePath).exists();
         if(exists) {

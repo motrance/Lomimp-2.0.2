@@ -16,13 +16,17 @@ import java.io.IOException;
 public class Settings {
     // Fields
     LogProvider log;
+    Integer logLevel = 0;
+    String outputPath = "c:/Lab/Lomimp-Output";
+    String logPath = "c:/Lab/Lomimp-Output/Logs";
+    String defaultOutputPath = "";
+    String defaultLogPath = "logs/";
     SettingsSet vikingSettings;
     SettingsSet euroJackpotSettings;
     SettingsSet lottoSettings;
     String dbUser;
     String dbPass;
     String dbHost;
-    Integer logLevel = 0;
 
     public Settings() {
     }
@@ -42,6 +46,18 @@ public class Settings {
             JsonNode root = mapper.readTree(new File(filePath));
             
             this.logLevel = root.get("LOGLEVEL").asInt();
+            String tmpOutputPath = root.get("OUTPUTPATH").asText();
+            if(tmpOutputPath != null && !tmpOutputPath.isEmpty()) {
+                this.outputPath = tmpOutputPath;
+            } else {
+                this.outputPath = defaultOutputPath;
+            }
+            String tmpLogPath = root.get("LOGPATH").asText();
+            if(tmpLogPath != null && !tmpLogPath.isEmpty()) {
+                this.logPath = tmpLogPath;
+            } else {
+                this.logPath = defaultLogPath;
+            }
 
             this.dbUser = root.get("DB").get("DBUSER").asText();
             this.dbPass = root.get("DB").get("DBPASS").asText();
@@ -96,6 +112,20 @@ public class Settings {
      */
     public Integer getLogLevel () {
         return this.logLevel;
+    }
+
+    /** 
+     * @return outputPath 
+     */
+    public String getOutputPath () {
+        return this.outputPath;
+    }
+    
+    /** 
+     * @return logPath 
+     */
+    public String getLogPath () {
+        return this.logPath;
     }
 
     /** 

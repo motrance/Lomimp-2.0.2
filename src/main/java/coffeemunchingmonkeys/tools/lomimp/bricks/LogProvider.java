@@ -23,18 +23,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class LogProvider {
     //Fields
-    private final Path logPath = Paths.get("logs/log.txt");
+    private String fileName = "log.txt";
+    private Path logPath = null;
     private static LogLevel logLevel = LogLevel.Debug;
     static 	boolean printToConsole = true;
-    private FileChannel channel;
+    private FileChannel channel = null;
     private JTextArea jTextArea;
 
     public LogProvider() {
-        initFile();
     }
 
     public LogProvider(JTextArea jTextArea) {
-        initFile();
         this.jTextArea = jTextArea;
     }
 
@@ -58,6 +57,9 @@ public class LogProvider {
      * @param msg
      */
     private synchronized void log(String msg, Integer severity) {
+        if(channel  == null) {
+            initFile();
+        }
         try {
             LogLevel logLevelString = LogLevel.values()[(severity!=null && severity >=0 && severity < LogLevel.values().length)? severity : LogLevel.Debug.logLevel()];
 
@@ -175,6 +177,16 @@ public class LogProvider {
         logLevel = LogLevel.values()[(level!=null && level >=0 && level < LogLevel.values().length)? level : LogLevel.Debug.logLevel()];
     }
 
+    /** 
+     * @param logLevelStgring
+     */
+    public void setlogPath(String logPath) {
+        if(logPath != null && logPath.length() > 0) {
+            this.logPath = Paths.get(logPath + "/" + fileName);
+        }
+    }
+
+    
     /** 
      * @param logLevelStgring
      */

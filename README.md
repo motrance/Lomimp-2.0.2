@@ -94,6 +94,8 @@ A configuraton file, "Settings.json" places in the folder "resources", is requir
 Example of settings.json file:
 {	
 	"LOGLEVEL":4,
+  "OUTPUTPATH": "",
+	"LOGPATH": "logs/",
 	"DB": {
 		"DBUSER": "xxxxxx",
 		"DBPASS": "xxxxxx",

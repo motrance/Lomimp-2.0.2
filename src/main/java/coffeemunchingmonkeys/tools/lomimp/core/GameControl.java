@@ -27,10 +27,12 @@ public class GameControl {
     //Fields
     LogProvider log;
     Settings settings;
+    String outputPath;
 
     public GameControl(LogProvider log, Settings settings) {
         this.log = log;
         this.settings = settings;
+        this.outputPath = settings.getOutputPath();
     }
 
     /** 
@@ -96,7 +98,8 @@ public class GameControl {
                 }
 
                 try {
-                    if(fileIO.write(workBook, sheetName)) {
+                    String filename = this.outputPath + sheetName;
+                    if(fileIO.write(workBook, filename)) {
                         log.writeInfo("Excel sheet created");
                     } else {
                         log.writeInfo("Unable to create Excel sheet");
