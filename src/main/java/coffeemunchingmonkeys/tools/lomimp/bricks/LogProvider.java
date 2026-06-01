@@ -23,8 +23,11 @@ import java.time.format.DateTimeFormatter;
  */
 public class LogProvider {
     //Fields
+    private static final long MAX_LOG_FILE_SIZE = 512L * 1024L; // 512 KB
+    private static final int DEFAULT_MAX_BACKUP_FILES = 20;
     private String fileName = "log.txt";
     private Path logPath = null;
+    private int maxBackupFiles = DEFAULT_MAX_BACKUP_FILES;
     private static LogLevel logLevel = LogLevel.Debug;
     static 	boolean printToConsole = true;
     private FileChannel channel = null;
@@ -39,6 +42,7 @@ public class LogProvider {
 
     private void initFile() {
         try {
+            ensureLogPath();
             Files.createDirectories(logPath.getParent());
 
             channel = FileChannel.open(
@@ -53,13 +57,65 @@ public class LogProvider {
         }
     }
 
+    private void ensureLogPath() {
+        if (logPath == null) {
+            logPath = Paths.get("logs").resolve(fileName);
+        }
+    }
+
+    private void rotateLogIfNeeded(int bytesToWrite) throws IOException {
+        ensureLogPath();
+        if (Files.exists(logPath) && Files.size(logPath) + bytesToWrite > MAX_LOG_FILE_SIZE) {
+            rotateLogFile();
+        }
+    }
+
+    private void rotateLogFile() throws IOException {
+        if (channel != null) {
+            channel.close();
+            channel = null;
+        }
+
+        if (!Files.exists(logPath)) {
+            return;
+        }
+
+        Path rotated = nextBackupPath();
+        Files.move(logPath, rotated);
+    }
+
+    private Path nextBackupPath() throws IOException {
+        String originalName = logPath.getFileName().toString();
+        String baseName = originalName;
+        String extension = "";
+        int dotIndex = originalName.lastIndexOf('.');
+        if (dotIndex > 0) {
+            baseName = originalName.substring(0, dotIndex);
+            extension = originalName.substring(dotIndex);
+        }
+
+        for (int index = 1; index <= maxBackupFiles; index++) {
+            Path candidate = logPath.getParent().resolve(baseName + "." + index + extension);
+            if (!Files.exists(candidate)) {
+                return candidate;
+            }
+        }
+
+        // If all backup slots are used, rotate oldest by shifting them up one slot.
+        for (int index = 1; index < maxBackupFiles; index++) {
+            Path source = logPath.getParent().resolve(baseName + "." + (index + 1) + extension);
+            Path target = logPath.getParent().resolve(baseName + "." + index + extension);
+            if (Files.exists(source)) {
+                Files.move(source, target);
+            }
+        }
+        return logPath.getParent().resolve(baseName + "." + maxBackupFiles + extension);
+    }
+
     /** 
      * @param msg
      */
     private synchronized void log(String msg, Integer severity) {
-        if(channel  == null) {
-            initFile();
-        }
         try {
             LogLevel logLevelString = LogLevel.values()[(severity!=null && severity >=0 && severity < LogLevel.values().length)? severity : LogLevel.Debug.logLevel()];
 
@@ -67,7 +123,16 @@ public class LogProvider {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd'T'HH:mm:ss:SSS");
             String formatted = now.format(formatter);
             String line = formatted + "\t" + logLevelString.name() + "\t" + msg + System.lineSeparator();
-            ByteBuffer buffer = ByteBuffer.wrap(line.getBytes());
+            byte[] bytes = line.getBytes();
+            ByteBuffer buffer = ByteBuffer.wrap(bytes);
+
+            if(channel  == null) {
+                initFile();
+            }
+            rotateLogIfNeeded(bytes.length);
+            if(channel == null) {
+                initFile();
+            }
 
             // 1. REALTIME FILE WRITE
             channel.write(buffer);
@@ -178,15 +243,36 @@ public class LogProvider {
     }
 
     /** 
-     * @param logLevelStgring
+     * @param path path to a log file or folder
      */
-    public void setlogPath(String logPath) {
-        if(logPath != null && logPath.length() > 0) {
-            this.logPath = Paths.get(logPath + "/" + fileName);
+    public void setlogPath(String path) {
+        setLogPath(path);
+    }
+
+    public void setLogPath(String path) {
+        if (path == null || path.isEmpty()) {
+            return;
+        }
+
+        Path providedPath = Paths.get(path);
+        if (providedPath.toString().endsWith(".") || providedPath.toString().endsWith("/") || providedPath.toString().endsWith("\\")) {
+            this.logPath = providedPath.resolve(fileName);
+        } else if (providedPath.getFileName() != null && providedPath.getFileName().toString().contains(".")) {
+            this.logPath = providedPath;
+        } else if (Files.isDirectory(providedPath)) {
+            this.logPath = providedPath.resolve(fileName);
+        } else {
+            // Treat it as folder if it doesn't look like a file name
+            this.logPath = providedPath.resolve(fileName);
         }
     }
 
-    
+    public void setMaxBackupFiles(int maxBackupFiles) {
+        if (maxBackupFiles > 0) {
+            this.maxBackupFiles = maxBackupFiles;
+        }
+    }
+
     /** 
      * @param logLevelStgring
      */

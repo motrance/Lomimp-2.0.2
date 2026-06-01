@@ -42,6 +42,7 @@ public class Lomimp extends javax.swing.JFrame {
         log = new LogProvider(jTextArea1);
         this.settings = new Settings(log);
         String logPath = settings.getLogPath();
+        String outputPath = settings.getOutputPath();
         Integer logLevel = settings.getLogLevel();
         log.setlogPath(logPath);
 
@@ -52,6 +53,9 @@ public class Lomimp extends javax.swing.JFrame {
 
         String txt = "Lomimp[" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS")) + "]";
         log.writeInfo(txt);
+
+        log.writeInfo("Log location: " + logPath);
+        log.writeInfo("Sheets saved to: " + outputPath);
 
         if(returnString != null) {
             log.writeError(returnString);
