@@ -83,7 +83,7 @@ public class Lomimp extends javax.swing.JFrame {
      */
     private boolean fetchNumbers() {
         fetchLatestNumbers = cbFetch.isSelected();
-        log.writeDebug("Fetching latest drawn numbers: " + fetchLatestNumbers);
+        log.writeInfo("Fetching latest drawn numbers: " + fetchLatestNumbers);
         stats = cbStat.isSelected();
         log.writeInfo("Statistic: " + stats);
 
